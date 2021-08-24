@@ -73,16 +73,6 @@ enum _selectpin {
     Dpin = 2,
 }
 
-
-enum waterpin {
-    P0,
-    P1,
-    P2,
-    P3,
-    P4,
-    P10,
-}
-
 enum _rockerpin {
     //% block="Xpin"
     Xpin = 0,
@@ -156,6 +146,40 @@ enum Select {
     _clear = 2,
 }
 
+enum key_board_value {
+    //% block="0"
+    val0 = '0',
+    //% block="1"
+    val1 = '1',
+    //% block="2"
+    val2 = '2',
+    //% block="3"
+    val3 = '3',
+    //% block="4"
+    val4 = '4',
+    //% block="5"
+    val5 = '5',
+    //% block="6"
+    val6 = '6',
+    //% block="7"
+    val7 = '7',
+    //% block="8"
+    val8 = '8',
+    //% block="9"
+    val9 = '9',
+    //% block="A"
+    valA = 'A',
+    //% block="B"
+    valB = 'B',
+    //% block="C"
+    valC = 'C',
+    //% block="D"
+    valD = 'D',
+    //% block="*"
+    valX = '*',
+    //% block="#"
+    valJ = '#'
+}
 
 
 enum barb_fitting {
@@ -199,9 +223,9 @@ enum Mode {
     //% block="BUTTON"
     BUTTON_MODE = 1,      // 按键模式
     //% block="KEYWORDS"
-    KEYWORDS_MODE = 2,    // 关键字模式
+    KEYWORDS_MODE = 2,    // 唤醒词模式
     //% block="KEYWORDS_AND"
-    KEYWORDS_AND_BUTTON = 3, //关键字加按键模式
+    KEYWORDS_AND_BUTTON = 3, // 唤醒词加按键模式
 }
 
  //% color="#FFA500" weight=10 icon="\uf2c9" block="Sensor:bit"
@@ -258,39 +282,6 @@ namespace sensors {
         let row = pins.analogReadPin(pin)
         return row
     }
-
-    // let _Apin = 0
-    // let _Dpin = 0
-    // let _Bpin = 0
-
-    // //% blockId=rotaryEncoder block="rotaryEncoder setup | pinA %pina|pinB %pinb|pinD %pind" group="旋转编码器模块"
-    // //% weight=70
-    // //% subcategory="基础输入模块"
-    // export function rotaryEncoder(pina: DigitalPin, pinb: DigitalPin, pind: DigitalPin): void {
-    //     _Apin = pina
-    //     _Bpin = pinb
-    //     _Dpin = pind
-    // }
-
-    // //% blockId=pinsRead block="select pin %selectpin" group="旋转编码器模块"
-    // //% weight=69
-    // //% subcategory="基础输入模块"
-    // export function pinsRead(selectpin: _selectpin): number {
-    //     let a
-    //     if (selectpin == 0)
-    //         a = _Apin
-    //     else if (selectpin == 1)
-    //         a = _Bpin
-    //     else if (selectpin == 2)
-    //         a = _Dpin
-    //     pins.digitalWritePin(a, 0)
-    //     if (pins.digitalReadPin(a) == 1) {
-    //         return 1;
-    //     } else {
-    //         return 0;
-    //     }
-    //     //return pins.digitalReadPin(a)
-    // }
    
     let _SDO = 0
     let _SCL = 0
@@ -311,17 +302,14 @@ namespace sensors {
         let DATA = 0
         pins.digitalWritePin(_SDO, 1)
         control.waitMicros(93)
-
         pins.digitalWritePin(_SDO, 0)
         control.waitMicros(10)
-
         for (let i = 0; i < 16; i++) {
             pins.digitalWritePin(_SCL, 1)
             pins.digitalWritePin(_SCL, 0)
             DATA |= pins.digitalReadPin(_SDO) << i
         }
         control.waitMicros(2 * 1000)
-// 	serial.writeString('' + DATA + '\n');
         switch (DATA & 0xFFFF) {
             case 0xFFFE: return "1"
             case 0xFFFD: return "2"
@@ -342,14 +330,22 @@ namespace sensors {
             default: return " "
         }
     }
-    
 
+    //% blockId=is_keyboard_enter block="is_keyboard_enter %val "   group="矩阵键盘模块"
+    //% weight=69
+    //% subcategory="基础输入模块"
+    export function is_keyboard_enter(val : key_board_value): boolean {
+        let value = actuator_keyborad_read();
+        return value == val;
+    }
+    
     let Xpin = 0
     let Ypin = 0
     let Bpin = 0
 
     //% blockId=rockerPin block="rockerPin setup | pinX %pinx|pinY %piny|pinB %pinb" group="摇杆模块"
     //% weight=70
+    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     //% subcategory="基础输入模块"
     export function rockerPin(pinx: AnalogPin, piny: AnalogPin, pinb: DigitalPin): void {
         Xpin = pinx
