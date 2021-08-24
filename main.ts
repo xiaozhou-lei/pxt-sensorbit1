@@ -286,6 +286,11 @@ namespace sensors {
     let _SDO = 0
     let _SCL = 0
 
+    /**
+     * 
+     * @param SDO  eg: p8
+     * @param SCL  eg: p2
+     */
     //% blockId=actuator_keyborad_pin block="actuator_keyborad_pin|SDOPIN %SDO|SCLPIN %SCL"   group="矩阵键盘模块"
     //% weight=71
     //% subcategory="基础输入模块"
@@ -336,6 +341,7 @@ namespace sensors {
     //% subcategory="基础输入模块"
     export function is_keyboard_enter(val : key_board_value): boolean {
         let value = actuator_keyborad_read();
+        basic.showString(value)
         return value == val;
     }
     
@@ -343,6 +349,12 @@ namespace sensors {
     let Ypin = 0
     let Bpin = 0
 
+    /**
+     * 
+     * @param pinx  eg: p0
+     * @param piny  eg: p1 
+     * @param pinb  eg: p8 
+     */
     //% blockId=rockerPin block="rockerPin setup | pinX %pinx|pinY %piny|pinB %pinb" group="摇杆模块"
     //% weight=70
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
@@ -377,8 +389,14 @@ namespace sensors {
         }
     }
 
+
     let _DIO = 0
     let _CLK = 0
+    /**
+     * 
+     * @param DIO 
+     * @param CLK 
+     */
     //% blockId=basic_piano_pin block="basic_piano_pin |DIO pin %DIO|CLK pin %CLK"   group="触摸钢琴模块 V1"
     //% weight=70
     //% subcategory="基础输入模块"
