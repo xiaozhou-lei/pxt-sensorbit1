@@ -336,6 +336,10 @@ namespace sensors {
         }
     }
 
+     /**
+     * 
+     * @param val  is enter key value eg: '22'
+     */
     //% blockId=is_keyboard_enter block="is_keyboard_enter %val "   group="矩阵键盘模块"
     //% weight=69
     //% subcategory="基础输入模块"
