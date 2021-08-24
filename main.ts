@@ -233,6 +233,7 @@ namespace sensors {
    
     //% blockId=touchbutton block="touch |digital pin %pin"   group="触摸模块"
     //% weight=70
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% subcategory="基础输入模块"
     export function touchButton(pin: DigitalPin): boolean {
        // pins.digitalWritePin(pin, 0)
@@ -245,6 +246,7 @@ namespace sensors {
 
     //% blockId=button block="Button |digital pin %pin"   group="按键模块"
     //% weight=70
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% subcategory="基础输入模块"
     export function Button(pin: DigitalPin): boolean {
      //   pins.digitalWritePin(pin, 0)
@@ -257,6 +259,7 @@ namespace sensors {
 
     //% blockId=crashbutton block="crashButton |digital pin %pin"   group="触碰模块"
     //% weight=70
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% subcategory="基础输入模块"
     export function crashButton(pin: DigitalPin): boolean {
        // pins.digitalWritePin(pin, 0)
@@ -269,6 +272,7 @@ namespace sensors {
 
     //% blockId=slideRheostat block="slideRheostat |analog pin %pin"   group="滑动变阻器模块"
     //% weight=70
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% subcategory="基础输入模块"
     export function slideRheostat(pin: AnalogPin): number {
         let row = pins.analogReadPin(pin)
@@ -277,6 +281,7 @@ namespace sensors {
 
     //% blockId=rotaryPotentiometer block="rotaryPotentiometer |analog pin %pin" group="旋转电位器模块"
     //% weight=70
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% subcategory="基础输入模块"
     export function rotaryPotentiometer(pin: AnalogPin): number {
         let row = pins.analogReadPin(pin)
@@ -288,11 +293,13 @@ namespace sensors {
 
     /**
      * 
-     * @param SDO  eg: p8
-     * @param SCL  eg: p2
+     * @param SDO  eg: P2
+     * @param SCL  eg: P8
      */
     //% blockId=actuator_keyborad_pin block="actuator_keyborad_pin|SDOPIN %SDO|SCLPIN %SCL"   group="矩阵键盘模块"
     //% weight=71
+    //% SDO.fieldEditor="gridpicker" SDO.fieldOptions.columns=4
+    //% SCL.fieldEditor="gridpicker" SCL.fieldOptions.columns=4
     //% subcategory="基础输入模块"
     export function actuator_keyborad_pin(SDO: DigitalPin, SCL: DigitalPin): void {
 
@@ -340,12 +347,8 @@ namespace sensors {
     //% weight=69
     //% subcategory="基础输入模块"
     export function is_keyboard_enter(val : key_board_value): boolean {
-        // basic.showString(val);
         let value = actuator_keyborad_read();
         value = value == " "?'55':value;
-        // if (value == " ") {
-        //     value = '55';
-        // }
         return value == val;
     }
     
@@ -355,13 +358,15 @@ namespace sensors {
 
     /**
      * 
-     * @param pinx  eg: p0
-     * @param piny  eg: p1 
-     * @param pinb  eg: p8 
+     * @param pinx  eg: P0
+     * @param piny  eg: P1 
+     * @param pinb  eg: P8 
      */
     //% blockId=rockerPin block="rockerPin setup | pinX %pinx|pinY %piny|pinB %pinb" group="摇杆模块"
     //% weight=70
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+    //% pinx.fieldEditor="gridpicker" pinx.fieldOptions.columns=4
+    //% piny.fieldEditor="gridpicker" piny.fieldOptions.columns=4
+    //% pinb.fieldEditor="gridpicker" pinb.fieldOptions.columns=4
     //% subcategory="基础输入模块"
     export function rockerPin(pinx: AnalogPin, piny: AnalogPin, pinb: DigitalPin): void {
         Xpin = pinx
@@ -398,11 +403,13 @@ namespace sensors {
     let _CLK = 0
     /**
      * 
-     * @param DIO 
-     * @param CLK 
+     * @param DIO; eg: P2
+     * @param CLK  eg: P8
      */
     //% blockId=basic_piano_pin block="basic_piano_pin |DIO pin %DIO|CLK pin %CLK"   group="触摸钢琴模块 V1"
     //% weight=70
+    //% DIO.fieldEditor="gridpicker" DIO.fieldOptions.columns=4
+    //% CLK.fieldEditor="gridpicker" CLK.fieldOptions.columns=4
     //% subcategory="基础输入模块"
     export function basic_piano_pin(DIO: DigitalPin, CLK: DigitalPin): void {
 
@@ -450,6 +457,8 @@ namespace sensors {
 
     //% blockId=piano_v2_init block="piano_v2_init|DIO %pianoDIO|CLK %pianoCLK"   group="触摸钢琴模块 V2"
     //% weight=61
+    //% pianoDIO.fieldEditor="gridpicker" pianoDIO.fieldOptions.columns=4
+    //% pianoCLK.fieldEditor="gridpicker" pianoCLK.fieldOptions.columns=4
     //% subcategory="基础输入模块"
     export function piano_v2_init(pianoDIO: DigitalPin, pianoCLK: DigitalPin): void {
 
@@ -491,7 +500,7 @@ namespace sensors {
     /**
      * 游戏手柄
      */
-    //% blockId=Gamepad_Press block="Gamepad buttons %button Is pressed？"  group="PH2.0手柄"
+    //% blockId=Gamepad_Press block="Gamepad buttons %button Is pressed？"  group="PH2.0手柄(IIC)"
     //% weight=74
     //% subcategory="基础输入模块"
     //% inlineInputMode=inline
@@ -506,7 +515,7 @@ namespace sensors {
     /**
      * PH2.0手柄
      */
-    //% blockId=Gamepad_Release block="Gamepad buttons %button Is Released？"  group="PH2.0手柄"
+    //% blockId=Gamepad_Release block="Gamepad buttons %button Is Released？"  group="PH2.0手柄(IIC)"
     //% weight=74
     //% subcategory="基础输入模块"
     //% inlineInputMode=inline
@@ -521,7 +530,7 @@ namespace sensors {
     /**
      * PH2.0手柄
      */
-    //% blockId=Gamepad_Shaft block="Game controller acquisition %shaft the value of"  group="PH2.0手柄"
+    //% blockId=Gamepad_Shaft block="Game controller acquisition %shaft the value of"  group="PH2.0手柄(IIC)"
     //% weight=74
     //% subcategory="基础输入模块"
     //% inlineInputMode=inline
@@ -539,7 +548,7 @@ namespace sensors {
     /**
      * PH2.0手柄
      */
-    //% blockId=Gamepad_Status block="Button %button is it %status status?"  group="PH2.0手柄"
+    //% blockId=Gamepad_Status block="Button %button is it %status status?"  group="PH2.0手柄(IIC)"
     //% weight=74
     //% subcategory="基础输入模块"
     //% inlineInputMode=inline
@@ -588,16 +597,18 @@ namespace sensors {
     
     //% blockId=sensor_water block="Water vapor sensor pin %pines"  group="水蒸气传感器"
     //% weight=70
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% inlineInputMode=inline
     //% subcategory="传感器"
-    export function sensor_water(pines: AnalogPin): number{
-        return pins.analogReadPin(pines);
+    export function sensor_water(pin: AnalogPin): number{
+        return pins.analogReadPin(pin);
         
    }
 
 
    //% blockId=sensor_temperature block="Pin %pin reads the analog value of the LM35"  group="LM35温度传感器"
    //% weight=70
+   //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
    //% inlineInputMode=inline
    //% subcategory="传感器"
    export function sensor_temperature(pin: AnalogPin): number {
@@ -609,6 +620,7 @@ namespace sensors {
 
    //% blockId=sensor_infraredTracking block="Pin %pin reads the digital value of the infraredTracking sensor" group="红外循迹传感器"
    //% weight=70
+   //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
    //% inlineInputMode=inline
    //% subcategory="传感器"
    export function sensor_infraredTracking(pin: DigitalPin): boolean {
@@ -622,6 +634,7 @@ namespace sensors {
 
    //% blockId=sensor_incline block="sensor_incline pin |digitalpin %pin" group="倾斜传感器"
    //% weight=70
+   //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
    //% inlineInputMode=inline
    //% subcategory="传感器"
    export function sensor_incline(pin: DigitalPin): boolean {
