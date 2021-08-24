@@ -332,7 +332,7 @@ namespace sensors {
             case 0x7FFF: return "D"
             case 0xEFFF: return "*"
             case 0xBFFF: return "#"
-            default: basic.showString("bcd"); return " "
+            default:     return " "
         }
     }
 
@@ -340,11 +340,8 @@ namespace sensors {
     //% weight=69
     //% subcategory="基础输入模块"
     export function is_keyboard_enter(val : key_board_value): boolean {
-        basic.showString(val);
         let value = actuator_keyborad_read();
-        if (value == " ") {
-            basic.showString('plh');
-        }
+        value = value?value:'55';
         return value == val;
     }
     
