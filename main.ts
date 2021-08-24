@@ -345,9 +345,6 @@ namespace sensors {
     //% subcategory="基础输入模块"
     export function is_keyboard_enter(val : key_board_value): boolean {
         let value = actuator_keyborad_read();
-        basic.showString(value)
-        basic.showString("AA")
-        basic.showString(val)
         return value == val;
     }
     
