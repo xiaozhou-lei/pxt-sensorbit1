@@ -336,11 +336,7 @@ namespace sensors {
         }
     }
 
-     /**
-     * 
-     * @param val  is enter key value eg: '22'
-     */
-    //% blockId=is_keyboard_enter block="is_keyboard_enter %val "   group="矩阵键盘模块"
+    //% blockId=is_keyboard_enter block="is keyboard enter %val "  val.defl="55"  group="矩阵键盘模块"
     //% weight=69
     //% subcategory="基础输入模块"
     export function is_keyboard_enter(val : key_board_value): boolean {
