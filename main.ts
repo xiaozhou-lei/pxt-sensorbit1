@@ -332,15 +332,19 @@ namespace sensors {
             case 0x7FFF: return "D"
             case 0xEFFF: return "*"
             case 0xBFFF: return "#"
-            default: return " "
+            default: basic.showString("bcd"); return " "
         }
     }
 
-    //% blockId=is_keyboard_enter block="is keyboard enter %val "  val.defl="55"  group="矩阵键盘模块"
+    //% blockId=is_keyboard_enter block="is keyboard enter %val "  group="矩阵键盘模块"
     //% weight=69
     //% subcategory="基础输入模块"
     export function is_keyboard_enter(val : key_board_value): boolean {
+        basic.showString(val);
         let value = actuator_keyborad_read();
+        if (value == " ") {
+            basic.showString('plh');
+        }
         return value == val;
     }
     
