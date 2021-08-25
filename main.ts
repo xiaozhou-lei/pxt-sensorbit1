@@ -181,6 +181,15 @@ enum key_board_value {
     valJ = '#'
 }
 
+enum em_analogPin {
+    P0,
+    P1,
+    P2,
+    P3,
+    P4,
+    P10
+}
+
 
 enum barb_fitting {
     //% block="LEFT"
@@ -274,7 +283,7 @@ namespace sensors {
     //% weight=70
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% subcategory="基础输入模块"
-    export function slideRheostat(pin: AnalogPin): number {
+    export function slideRheostat(pin: em_analogPin): number {
         let row = pins.analogReadPin(pin)
         return row
     }
@@ -283,7 +292,7 @@ namespace sensors {
     //% weight=70
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% subcategory="基础输入模块"
-    export function rotaryPotentiometer(pin: AnalogPin): number {
+    export function rotaryPotentiometer(pin: em_analogPin): number {
         let row = pins.analogReadPin(pin)
         return row
     }
@@ -368,7 +377,7 @@ namespace sensors {
     //% piny.fieldEditor="gridpicker" piny.fieldOptions.columns=4
     //% pinb.fieldEditor="gridpicker" pinb.fieldOptions.columns=4
     //% subcategory="基础输入模块"
-    export function rockerPin(pinx: AnalogPin, piny: AnalogPin, pinb: DigitalPin): void {
+    export function rockerPin(pinx: em_analogPin, piny: em_analogPin, pinb: DigitalPin): void {
         Xpin = pinx
         Ypin = piny
         Bpin = pinb
