@@ -181,7 +181,7 @@ enum key_board_value {
     valJ = '#'
 }
 
-enum em_analogPin {
+enum em_nalogPin {
     P0,
     P1,
     P2,
@@ -283,7 +283,7 @@ namespace sensors {
     //% weight=70
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% subcategory="基础输入模块"
-    export function slideRheostat(pin: em_analogPin): number {
+    export function slideRheostat(pin: AnalogPin): number {
         let row = pins.analogReadPin(pin)
         return row
     }
@@ -292,7 +292,7 @@ namespace sensors {
     //% weight=70
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=4
     //% subcategory="基础输入模块"
-    export function rotaryPotentiometer(pin: em_analogPin): number {
+    export function rotaryPotentiometer(pin: AnalogPin): number {
         let row = pins.analogReadPin(pin)
         return row
     }
@@ -367,9 +367,9 @@ namespace sensors {
 
     /**
      * 
-     * @param pinx  eg: P0
-     * @param piny  eg: P1 
-     * @param pinb  eg: P8 
+     * @param pinx  eg: AnalogPin.P0
+     * @param piny  eg: AnalogPin.P1 
+     * @param pinb  eg: AnalogPin.P8 
      */
     //% blockId=rockerPin block="rockerPin setup | pinX %pinx|pinY %piny|pinB %pinb" group="摇杆模块"
     //% weight=70
@@ -377,7 +377,7 @@ namespace sensors {
     //% piny.fieldEditor="gridpicker" piny.fieldOptions.columns=4
     //% pinb.fieldEditor="gridpicker" pinb.fieldOptions.columns=4
     //% subcategory="基础输入模块"
-    export function rockerPin(pinx: em_analogPin, piny: em_analogPin, pinb: DigitalPin): void {
+    export function rockerPin(pinx: AnalogPin, piny: AnalogPin, pinb: DigitalPin): void {
         Xpin = pinx
         Ypin = piny
         Bpin = pinb
@@ -412,8 +412,8 @@ namespace sensors {
     let _CLK = 0
     /**
      * 
-     * @param DIO; eg: P2
-     * @param CLK  eg: P8
+     * @param DIO; eg: AnalogPin.P2
+     * @param CLK  eg: AnalogPin.P8
      */
     //% blockId=basic_piano_pin block="basic_piano_pin |DIO pin %DIO|CLK pin %CLK"   group="触摸钢琴模块 V1"
     //% weight=70
@@ -464,6 +464,11 @@ namespace sensors {
     let _pianoDIO = 0
     let _pianoCLK = 0
 
+    /**
+     * 
+     * @param pianoDIO AnalogPin.P2
+     * @param pianoCLK AnalogPin.P8
+     */
     //% blockId=piano_v2_init block="piano_v2_init|DIO %pianoDIO|CLK %pianoCLK"   group="触摸钢琴模块 V2"
     //% weight=61
     //% pianoDIO.fieldEditor="gridpicker" pianoDIO.fieldOptions.columns=4
