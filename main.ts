@@ -181,7 +181,7 @@ enum key_board_value {
     valJ = '#'
 }
 
-enum em_nalogPin {
+enum em_analogPin {
     P0,
     P1,
     P2,
@@ -192,14 +192,14 @@ enum em_nalogPin {
 
 
 enum barb_fitting {
-    //% block="LEFT"
-    BUTOON_LEFT = 0,
-    //% block="RIGHT" 
-    BUTOON_RIGHT = 1,
     //% block="UP"
     BUTOON_UP = 2, 
+    //% block="RIGHT" 
+    BUTOON_RIGHT = 1,
     //% block="DOWN"
     BUTOON_DOWN = 3, 
+    //% block="LEFT"
+    BUTOON_LEFT = 0,
     //% block="BUTTON"
     JOYSTICK_BUTTON = 4,
 }
@@ -1696,7 +1696,7 @@ namespace sensors {
         }
     }
 
-    //% blockId="TM650_DIGIT" block="show digit %num|at %bit"  group="TM1650数码管"
+    //% blockId="TM650_DIGIT" block="show digit %num|at %bit"  group="TM1650数码管(IIC)"
     //% weight=80 blockGap=8
     //% num.max=15 num.min=0
     //% subcategory="显示器"
@@ -1706,7 +1706,7 @@ namespace sensors {
         dat(bit, _SEG[num % 16])
     }
 
-    //% blockId="TM650_SHOW_NUMBER" block="show number %num"  group="TM1650数码管"
+    //% blockId="TM650_SHOW_NUMBER" block="show number %num"  group="TM1650数码管(IIC)"
     //% weight=100 blockGap=8
     //% subcategory="显示器"
     export function showNumber(num: number) {
@@ -1721,7 +1721,7 @@ namespace sensors {
         digit(Math.idiv(num, 100) % 10, 1)
     }
 
-    //% blockId="TM650_SHOW_HEX_NUMBER" block="show hex number %num"  group="TM1650数码管"
+    //% blockId="TM650_SHOW_HEX_NUMBER" block="show hex number %num"  group="TM1650数码管(IIC)"
     //% weight=90 blockGap=8
     //% subcategory="显示器"
     export function showHex(num: number) {
@@ -1736,7 +1736,7 @@ namespace sensors {
         digit((num >> 8) % 16, 1)
     }
 
-    //% blockId="TM650_SHOW_DP" block="show dot point %bit|show %num" group="TM1650数码管"
+    //% blockId="TM650_SHOW_DP" block="show dot point %bit|show %num" group="TM1650数码管(IIC)"
     //% weight=80 blockGap=8
     //% subcategory="显示器"
     //% bit.max=3 bit.min=0
@@ -1746,7 +1746,7 @@ namespace sensors {
         else dat(bit, dbuf[bit % 4] & 0x7F)
     }
 
-    //% blockId="TM650_INTENSITY" block="set intensity %dat" group="TM1650数码管"
+    //% blockId="TM650_INTENSITY" block="set intensity %dat" group="TM1650数码管(IIC)"
     //% weight=70 blockGap=8
     //% subcategory="显示器"
     //% dat.max=7 dat.min=0
@@ -1847,12 +1847,12 @@ namespace sensors {
          * set TM1637 intensity, range is [0-8], 0 is off.
          * @param val the brightness of the TM1637, eg: 7
          */
-        //% blockId="TM1637_set_intensity" block="%tm| set intensity %val"  group="TM1637数码管"
+        //% blockId="TM1637_set_intensity" block="%tm1637| set intensity %val"  group="TM1637数码管"
         //% weight=88 
         //% parts="TM1637"
         //% subcategory="显示器"
         //% val.max=8 val.min=0
-        intensity(val: number) {
+        intensity(val: number = 7) {
             if (val < 1) {
                 this.off()
                 return
@@ -1882,7 +1882,7 @@ namespace sensors {
          * @param num number will show, eg: 5
          * 
          */
-        //% blockId="TM1637_showbit" block="%tm| show digit %num |at %bit"  group="TM1637数码管"
+        //% blockId="TM1637_showbit" block="%tm1637| show digit %num |at %bit"  group="TM1637数码管"
         //% weight=90 blockGap=8
         //% parts="TM1637"
         //% bit.max=3 bit.min=0
@@ -1896,7 +1896,7 @@ namespace sensors {
           * show a number. 
           * @param num is a number, eg: 0
           */
-        //% blockId="TM1637_shownum" block="%tm| show number %num"  group="TM1637数码管"
+        //% blockId="TM1637_shownum" block="%tm1637| show number %num"  group="TM1637数码管"
         //% weight=91 blockGap=8
         //% parts="TM1637"
         //% subcategory="显示器"
@@ -1916,7 +1916,7 @@ namespace sensors {
           * show a hex number. 
           * @param num is a hex number, eg: 0
           */
-        //% blockId="TM1637_showhex" block="%tm| show hex number %num"   group="TM1637数码管"
+        //% blockId="TM1637_showhex" block="%tm1637| show hex number %num"   group="TM1637数码管"
         //% weight=90 blockGap=8
         //% parts="TM1637"
         //% subcategory="显示器"
@@ -1937,7 +1937,7 @@ namespace sensors {
          * @param bit is the position,eg: 0
          * 
          */
-        //% blockId="TM1637_showDP" block="%tm| DotPoint at %bit|show %_status"  group="TM1637数码管"
+        //% blockId="TM1637_showDP" block="%tm1637| DotPoint at %bit|show %_status"  group="TM1637数码管"
         //% weight=70 blockGap=8
         //% parts="TM1637"
         //% subcategory="显示器"
@@ -1949,7 +1949,7 @@ namespace sensors {
             else this._dat(bit, this.buf[bit] & 0x7F)
         }
 
-        //% blockId="TM1637_clear" block="clear %tm"  group="TM1637数码管"
+        //% blockId="TM1637_clear" block="clear %tm1637"  group="TM1637数码管"
         //% weight=80 blockGap=8
         //% parts="TM1637"
         //% subcategory="显示器"
@@ -1960,7 +1960,7 @@ namespace sensors {
             }
         }
 
-        //% blockId="TM1637_on" block="turn on %tm"  group="TM1637数码管"
+        //% blockId="TM1637_on" block="turn on %tm1637"  group="TM1637数码管"
         //% weight=86 blockGap=8
         //% parts="TM1637"
         //% subcategory="显示器"
@@ -1970,7 +1970,7 @@ namespace sensors {
             this._write_dsp_ctrl()
         }
 
-        //% blockId="TM1637_off" block="turn off %tm"  group="TM1637数码管"
+        //% blockId="TM1637_off" block="turn off %tm1637"  group="TM1637数码管"
         //% weight=85 blockGap=8
         //% parts="TM1637"
         //% subcategory="显示器"
@@ -1987,15 +1987,16 @@ namespace sensors {
     //% subcategory="显示器"
     //% intensity.max=8 intensity.min=0
     //% bit.max=4 bit.min=1
+    //% blockSetVariable=tm1637
     export function TMcreate(clk: DigitalPin, dio: DigitalPin, intensity: number, count: number): TM1637LEDs {
-        let tm = new TM1637LEDs()
-        tm.clk = clk
-        tm.dio = dio
+        let tm1637 = new TM1637LEDs()
+        tm1637.clk = clk
+        tm1637.dio = dio
         if ((count < 1) || (count > 5)) count = 4
-        tm.count = count
-        tm.brightness = intensity
-        tm.init()
-        return tm
+        tm1637.count = count
+        tm1637.brightness = intensity
+        tm1637.init()
+        return tm1637
     }
 
    
