@@ -589,16 +589,16 @@ namespace sensors {
         pins.i2cWriteBuffer(addr, buf)
     }
 
-    function i2cwrite1(addr: number, reg: number, value: number ,value1: string) {
+    function i2cwriteContent(addr: number, reg: number, value: number ,value1: string) {
         let lengths = value1.length
         let buf = pins.createBuffer(2+lengths)
         //let arr = value1.split('')
         buf[0] = reg 
         buf[1] = value
-        let betys = []
-        betys = stringToBytes(value1)
-        for (let i = 0; i < betys.length; i++) {
-            buf[2+i] = betys[i]
+        let bytes = []
+        bytes = stringToBytes(value1)
+        for (let i = 0; i < bytes.length; i++) {
+            buf[2+i] = bytes[i]
         }
         pins.i2cWriteBuffer(addr, buf)
     }
@@ -2032,7 +2032,7 @@ namespace sensors {
     //% inlineInputMode=inline
     //% weight=95
     export function Speech_recognition_glossary(word_number : number, word_content : string): void {
-        i2cwrite1(VOICE_IIC_ADDR, VOICE_ADD_WORDS_REG, word_number,word_content)
+        i2cwriteContent(VOICE_IIC_ADDR, VOICE_ADD_WORDS_REG, word_number,word_content)
         basic.pause(300)
     }
 
@@ -2046,6 +2046,15 @@ namespace sensors {
         return result;
      }
 
+    //% blockId="Speech_config_keyword" block="Voice recognition module set wake-up keywords %word_content"  group="语音识别模块"
+    //% subcategory="智能模块"
+    //% inlineInputMode=inline
+    //% weight=95
+    export function Speech_config_keyword(word_content : string): void {
+        i2cwriteContent(VOICE_IIC_ADDR, VOICE_ADD_WORDS_REG, 0, word_content)
+        basic.pause(300)
+    }
+    
     //% blockId="Speech_recognition_time" block="Voice recognition to set wake-up time %time"  group="语音识别模块"
     //% subcategory="智能模块"
     //% inlineInputMode=inline
