@@ -2027,6 +2027,11 @@ namespace sensors {
         basic.pause(300)
     }
 
+    /**
+     * speed recognition glossary. 
+     * @param word_number is the word number,eg: 1
+     * 
+    */
     //% blockId="Speech_recognition_glossary" block="Voice recognition to set the word number %word_number|Word content %word_content"  group="语音识别模块"
     //% subcategory="智能模块"
     //% inlineInputMode=inline
@@ -2055,6 +2060,11 @@ namespace sensors {
         basic.pause(300)
     }
     
+    /**
+     * speed recognition time. 
+     * @param time is the key word config time,eg: 10
+     * 
+    */
     //% blockId="Speech_recognition_time" block="Voice recognition to set wake-up time %time"  group="语音识别模块"
     //% subcategory="智能模块"
     //% inlineInputMode=inline
